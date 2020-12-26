@@ -1,11 +1,12 @@
-const { REDIS_PORT, EMAIL, PASSWORD, USERNAME, PLATFORM, PORT } = require("./consts");
+const { REDIS_PORT, EMAIL, PASSWORD, USERNAME, PLATFORM } = require("./consts");
 const API = require('call-of-duty-api')({ platform: "acti" });
 const express = require("express");
 const bodyParser = require("body-parser");
 const redis = require('redis');
 const { restart } = require("nodemon");
+const port = process.env.PORT || 3000
 
-const client = redis.createClient(REDIS_PORT);
+const client = redis.createClient(process.env.REDIS_URL);
 const app = express();
 
 app.use(express.static("public"));
@@ -76,5 +77,5 @@ app.get("/g/:username", cache, (req, res) => {
 });
 
 app.listen(PORT, () => {
-	console.log("Example app listening on port " + PORT);
+	console.log("Example app listening on port " + port);
 });
