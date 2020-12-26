@@ -1,13 +1,15 @@
 const { REDIS_PORT, EMAIL, PASSWORD, USERNAME, PLATFORM } = require("./consts");
 const API = require('call-of-duty-api')({ platform: "acti" });
 const express = require("express");
-const bodyParser = require("body-parser");
+const cors = require('cors')
 const redis = require('redis');
 const port = process.env.PORT || 8080
 
 const client = redis.createClient(process.env.REDIS_URL);
 const app = express();
 app.use(express.static("public"));
+
+app.use(cors())
 
 // app.use(function (req, res, next) {
 
@@ -27,6 +29,7 @@ app.use(express.static("public"));
 // 	// Pass to next layer of middleware
 // 	next();
 // });
+
 
 function cache(req, res, next) {
 	const { username } = req.params;
