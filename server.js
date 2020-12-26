@@ -4,11 +4,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const redis = require('redis');
 const { restart } = require("nodemon");
-const port = process.env.PORT || 3000
+const port = process.env.DB_PORT || 8080
 
 const client = redis.createClient(process.env.REDIS_URL);
 const app = express();
-
 app.use(express.static("public"));
 
 // app.use(function (req, res, next) {
@@ -76,6 +75,6 @@ app.get("/g/:username", cache, (req, res) => {
 	getData()
 });
 
-app.listen(PORT, () => {
+app.listen(port, () => {
 	console.log("Example app listening on port " + port);
 });
