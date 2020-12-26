@@ -3,7 +3,7 @@ const API = require('call-of-duty-api')({ platform: "acti" });
 const express = require("express");
 const bodyParser = require("body-parser");
 const redis = require('redis');
-const port = process.env.DB_PORT || 8080
+const port = process.env.PORT || 8080
 
 const client = redis.createClient(process.env.REDIS_URL);
 const app = express();
