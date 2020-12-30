@@ -1,6 +1,3 @@
-/* eslint-disable func-style */
-/* eslint-disable no-undef */
-/* eslint-disable indent */
 const { REDIS_PORT, EMAIL, PASSWORD, USERNAME, PLATFORM } = require("./consts");
 const API = require('call-of-duty-api')({ platform: "acti" });
 const express = require("express");
@@ -31,14 +28,8 @@ app.use(cors());
 	})
 } */
 //, cache
-/* app.get("/:name", (req, res) => {
-  console.log(req.params.name);
-  //console.log(req);
-  res.send("helloo");
-}); */
-app.get("/stats/:username", (req, res) => {
-console.log(typeof req.params.username);
-console.log(req.params.username);
+/* app.get("/g/:username", (req, res) => {
+
 	async function getData() {
 		try {
 			await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
@@ -50,26 +41,29 @@ console.log(req.params.username);
 			console.log("error");
 		}
 		try {
-			let data = await API.MWwz(req.params.username, PLATFORM);
+			let data = await API.MWwz(USERNAME, PLATFORM);
 			console.log("Sending Data!!!");
 
-			//const { username } = req.params
+			const { username } = req.params
 
-			const guns = JSON.stringify(data.lifetime.itemData);
+			const guns = JSON.stringify(data.lifetime.itemData)
 			console.log(username);
-			//client.setex(username, 3600, guns)
+			client.setex(username, 3600, guns)
 
-      res.send(guns)
-      res.send("cats")
+			res.send(guns)
 		} catch (error) {
 			console.log("Data Error");
 			console.log(error);
 		}
 	}
 	getData()
+}); */
+
+app.get("/:username&:platform", (req, res) => {
+  console.log(req.params.username);
+  console.log(req.params.platform);
+  
 });
-
-
 
 app.listen(port, () => {
 	console.log("Example app listening on port " + port);
