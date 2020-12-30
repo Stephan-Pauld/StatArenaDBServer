@@ -1,0 +1,20 @@
+
+-- CREATE DATABASE IF NOT EXISTS stat_site DEFAULT CHARACTER SET utf8;
+
+DROP TABLE IF EXISTS users CASCADE;
+
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  stream_platform VARCHAR(255)
+);
+
+
+
+GRANT ALL PRIVILEGES ON DATABASE stat_site TO labber;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO labber;
+ALTER TABLE users OWNER TO labber;
+-- ALTER TABLE user_favourites OWNER TO labber;
+-- ALTER TABLE items OWNER TO labber;
+-- ALTER TABLE conversations OWNER TO labber;
