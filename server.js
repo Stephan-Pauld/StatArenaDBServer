@@ -59,12 +59,14 @@ app.use(cors());
 	getData()
 }); */
 
-app.get("/:username&:platform", (req, res) => {
-  console.log(req.params.username);
-  console.log(req.params.platform);
+app.get("/:nickname", (req, res) => {
+  console.log(req.params.nickname);
+  //console.log(req.params.platform);
+  let gamerId = req.params.nickname.data;
+  res.send(gamerId);
   
 });
 
 app.listen(port, () => {
-	console.log("Example app listening on port " + port);
+  console.log("Example app listening on port " + port);
 });
