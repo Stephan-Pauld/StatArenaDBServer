@@ -57,11 +57,11 @@ app.use(cors());
 		}
 	}
 	getData()
-}); */
+});  */
 
-app.get("/:nickname", (req, res) => {
+app.get("/nickname=:nickname&platform=:platform", (req, res) => {
   console.log(req.params.nickname);
-  //console.log(req.params.platform);
+  console.log(req.params.platform);
   let gamerId = req.params.nickname.data;
   res.send(gamerId);
   
