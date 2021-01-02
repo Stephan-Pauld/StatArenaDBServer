@@ -58,6 +58,8 @@ function cache(key) {
 				if (err) throw err;
 
 				if (data !== null) {
+					const parsed = JSON.parse(data)
+					const fixedData = {data: parsed, gun: gunName}
 					console.log("Grabbing Cached for TrackedStats!!", gunName);
 					res.send(JSON.parse(data))
 				} else {
