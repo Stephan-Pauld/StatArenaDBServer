@@ -41,20 +41,6 @@ function cache(key) {
 				if (data !== null) {
 					console.log("Grabbing Cached for Stats!!");
 
-					// MAYBE SEND DATA TO REACT LIKE THIS?? SEEMS MUCH CLEANER ON THE REACT SIDE? CAN CREATE HELPER FUNCTIONS IN THE SERVER PERHAPS TOO??? ALSO WE SHOULD DO THIS BEFORE THE CACHE!
-
-					// const gamesPlayed = allData.lifetime.all.properties.gamesPlayed
-					// const misses = allData.lifetime.all.properties.misses
-					// const bestKills = allData.lifetime.all.properties.bestKills
-
-					// const newObj = {
-					// 	gamesPlayed,
-					// 	misses,
-					// 	bestKills
-					// }
-
-
-
 					const allData = JSON.parse(data);
 					const gameModes = allData.lifetime.mode
 
@@ -64,22 +50,54 @@ function cache(key) {
 				}
 			})
 		}
+	} if (key === "-tracked") {
+		return function (req, res, next) {
+
+			const { username, gunName } = req.params;
+			client.get(`${username}-${gunName}${key}`, (err, data) => {
+				if (err) throw err;
+
+				if (data !== null) {
+					console.log("Grabbing Cached for TrackedStats!!", gunName);
+					res.send(JSON.parse(data))
+				} else {
+					next()
+				}
+			})
+		}
 	}
 }
 
+Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
+	async function getTrackedData() {
+		try {
+			await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
+			console.log("Logging In");
+		} catch (Error) {
+			//Handle Exception
+			console.log("Login Error");
+	
+			console.log("error");
+		}
+		try {
+			let data = await API.MWwz(USERNAME, PLATFORM);
 
-
-
-
-
-
-
-
-
-
-
-
-
+			console.log("Sending Tracked Data!!!");
+			const { username, gunName, category } = req.params
+	
+			const trackedStat = JSON.stringify(data.lifetime.itemData[category][gunName])
+			console.log(username, "is getting data for a tracked gun: ", gunName);
+	
+			client.setex(`${username}-${gunName}-tracked`, 3600, trackedStat)
+	
+			res.send(trackedStat)
+		} catch (error) {
+			console.log("Data Error");
+			console.log(error);
+		}
+	}
+	getTrackedData()
+});
 
 
 
@@ -113,34 +131,6 @@ Router.get("/:username", cache("-guns"), (req, res) => {
 	}
 	getGunData()
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Router.get("/allstats/:username", cache("-stats"), (req, res) => {
 	async function getAllData() {

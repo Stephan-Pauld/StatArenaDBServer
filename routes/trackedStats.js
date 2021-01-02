@@ -2,12 +2,6 @@ const express = require("express");
 const Router = express.Router();
 const sqlConnection = require('../lib/db.js');
 
-
-
-
-
-
-
 const addNewGun = (trackedStat, gun) => {
   sqlConnection.query(`INSERT INTO tracked_stats (user_id, tracked, stat_name) VALUES(1, '${trackedStat}', '${gun}')`, (err, row, fields) => {
     if (!err) {
@@ -42,6 +36,7 @@ Router.get("/", (req, res) => {
 })
 
 Router.post("/addnew", (req, res) => {
+  console.log(req.body);
   const trackedStat = JSON.stringify(req.body);
   const gun = req.body.gun
 
