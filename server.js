@@ -20,11 +20,13 @@ const usersRoutes 	     	= require("./routes/users");
 const trackedStatsRoutes 	= require("./routes/trackedStats");
 const achievementsRoutes 	= require("./routes/achievements");
 const statRoutes         	= require("./routes/stats");
+const rouletteRoutes      = require("./routes/roulette");
 
 app.use("/users", usersRoutes);
 app.use("/trackedstats", trackedStatsRoutes);
 app.use("/achievements", achievementsRoutes);
 app.use("/stats", statRoutes);
+app.use("/roulette", rouletteRoutes);
 
 app.listen(port, () => {
 	console.log("Example app listening on port " + port);
