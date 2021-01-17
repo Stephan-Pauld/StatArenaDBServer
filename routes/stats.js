@@ -50,7 +50,7 @@ function cache(key) {
 				}
 			})
 		}
-	} if (key === "-tracked") {
+	} else if (key === "-tracked") {
 		return function (req, res, next) {
 
 			const { username, gunName } = req.params;
@@ -59,9 +59,30 @@ function cache(key) {
 
 				if (data !== null) {
 					const parsed = JSON.parse(data)
-					const fixedData = {data: parsed, gun: gunName}
+					const fixedData = { data: parsed, gun: gunName }
 					console.log("Grabbing Cached for TrackedStats!!", gunName);
 					res.send(JSON.parse(data))
+				} else {
+					next()
+				}
+			})
+		}
+	} else if (key === "-overlay") {
+		return function (req, res, next) {
+
+			const { username } = req.params;
+			client.get(`${username}${key}`, (err, data) => {
+				if (err) throw err;
+
+				if (data !== null) {
+					console.log("Grabbing Cached for OverlayStats!!");
+
+					const allData = JSON.parse(data);
+					const gameModes = allData.lifetime.mode
+					console.log(allData);
+					console.log(Object.keys(allData));
+
+					// res.send(allData)
 				} else {
 					next()
 				}
@@ -70,105 +91,146 @@ function cache(key) {
 	}
 }
 
-Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
-	async function getTrackedData() {
-		try {
-			await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
-			console.log("Logging In");
-		} catch (Error) {
-			//Handle Exception
-			console.log("Login Error");
-	
-			console.log("error");
+
+
+
+
+
+
+
+
+	Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
+		async function getTrackedData() {
+			try {
+				await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
+				console.log("Logging In");
+			} catch (Error) {
+				//Handle Exception
+				console.log("Login Error");
+
+				console.log("error");
+			}
+			try {
+				let data = await API.MWwz(USERNAME, PLATFORM);
+
+				console.log("Sending Tracked Data!!!");
+				const { username, gunName, category } = req.params
+				console.log(username, gunName, category);
+				const trackedStat = JSON.stringify(data.lifetime.itemData[category][gunName])
+				console.log(username, "is getting data for a tracked gun: ", gunName);
+
+				client.setex(`${username}-${gunName}-tracked`, 3600, trackedStat)
+
+				res.send(trackedStat)
+			} catch (error) {
+				console.log("Data Error");
+				console.log(error);
+			}
 		}
-		try {
-			let data = await API.MWwz(USERNAME, PLATFORM);
+		getTrackedData()
+	});
 
-			console.log("Sending Tracked Data!!!");
-			const { username, gunName, category } = req.params
-	
-			const trackedStat = JSON.stringify(data.lifetime.itemData[category][gunName])
-			console.log(username, "is getting data for a tracked gun: ", gunName);
-	
-			client.setex(`${username}-${gunName}-tracked`, 3600, trackedStat)
-	
-			res.send(trackedStat)
-		} catch (error) {
-			console.log("Data Error");
-			console.log(error);
+
+
+	Router.get("/:username", cache("-guns"), (req, res) => {
+		async function getGunData() {
+			try {
+				await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
+				console.log("Logging In");
+			} catch (Error) {
+				//Handle Exception
+				console.log("Login Error");
+
+				console.log("error");
+			}
+			try {
+				let data = await API.MWwz(USERNAME, PLATFORM);
+				console.log("Sending Gun Data!!!");
+
+				const { username } = req.params
+
+				const guns = JSON.stringify(data.lifetime.itemData)
+				console.log(username);
+
+				client.setex(`${username}-guns`, 3600, guns)
+
+				res.send(guns)
+			} catch (error) {
+				console.log("Data Error");
+				console.log(error);
+			}
 		}
-	}
-	getTrackedData()
-});
+		getGunData()
+	});
 
+	Router.get("/allstats/:username", cache("-stats"), (req, res) => {
+		async function getAllData() {
+			try {
+				await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
+				console.log("Logging In");
+			} catch (Error) {
+				//Handle Exception
+				console.log("Login Error");
 
+				console.log("error");
+			}
+			try {
+				let data = await API.MWwz(USERNAME, PLATFORM);
+				console.log("Sending All Data!!!");
 
-Router.get("/:username", cache("-guns"), (req, res) => {
-	async function getGunData() {
-		try {
-			await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
-			console.log("Logging In");
-		} catch (Error) {
-			//Handle Exception
-			console.log("Login Error");
+				const { username } = req.params
 
-			console.log("error");
+				const allData = JSON.stringify(data)
+				console.log(username);
+
+				client.setex(`${username}-stats`, 3600, allData)
+
+				res.send(allData)
+			} catch (error) {
+				console.log("Data Error");
+				console.log(error);
+			}
 		}
-		try {
-			let data = await API.MWwz(USERNAME, PLATFORM);
-			console.log("Sending Gun Data!!!");
+		getAllData()
+	});
 
-			const { username } = req.params
 
-			const guns = JSON.stringify(data.lifetime.itemData)
-			console.log(username);
+	Router.get("/overlay/:username", cache("-overlay"), (req, res) => {
+		async function getAllOverlayData() {
+			try {
+				await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
+				console.log("Logging In");
+			} catch (Error) {
+				//Handle Exception
+				console.log("Login Error");
 
-			client.setex(`${username}-guns`, 3600, guns)
+				console.log("error");
+			}
+			try {
+				let data = await API.MWwz(USERNAME, PLATFORM);
+				console.log("Sending All Data for overlay!!!");
 
-			res.send(guns)
-		} catch (error) {
-			console.log("Data Error");
-			console.log(error);
+				const { username } = req.params
+
+				const allData = JSON.stringify(data)
+				console.log(username);
+
+				client.setex(`${username}-overlay`, 3600, allData)
+
+				res.send(allData)
+			} catch (error) {
+				console.log("Data Error");
+				console.log(error);
+			}
 		}
-	}
-	getGunData()
-});
+		getAllOverlayData()
+	});
 
-Router.get("/allstats/:username", cache("-stats"), (req, res) => {
-	async function getAllData() {
-		try {
-			await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
-			console.log("Logging In");
-		} catch (Error) {
-			//Handle Exception
-			console.log("Login Error");
 
-			console.log("error");
-		}
-		try {
-			let data = await API.MWwz(USERNAME, PLATFORM);
-			console.log("Sending All Data!!!");
 
-			const { username } = req.params
 
-			const allData = JSON.stringify(data)
-			console.log(username);
 
-			client.setex(`${username}-stats`, 3600, allData)
 
-			res.send(allData)
-		} catch (error) {
-			console.log("Data Error");
-			console.log(error);
-		}
-	}
-	getAllData()
-});
 
-// Router.get("/allstats", (req, res) => {
-// 	console.log("Cats");
-// 	res.send("Toast")
-// });
-
-module.exports = Router
+	module.exports = Router
 
