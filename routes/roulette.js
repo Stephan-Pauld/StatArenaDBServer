@@ -45,7 +45,14 @@ Router.get('/secondary', (req, res) => {
 });
 
 Router.get('/attachments', (req, res) => {
-  sqlConnection.query('SELECT * FROM gun_attachments ORDER BY RAND() LIMIT 5;', (error, results) => {
+
+  const queryString = `
+  SELECT a.type,
+  (SELECT b.name FROM gun_attachments AS b WHERE a.type = b.type ORDER BY RAND() LIMIT 1) AS attachment_name,
+  (SELECT c.image FROM gun_attachments AS c WHERE c.id = (SELECT d.id FROM gun_attachments AS d WHERE d.type=a.type LIMIT 1) ORDER BY RAND() LIMIT 1) AS attachment_image 
+  FROM gun_attachments AS a GROUP BY a.type ORDER BY RAND() LIMIT 5;`;
+
+  sqlConnection.query(queryString, (error, results) => {
     if (error) {
       return;
     }
@@ -55,3 +62,8 @@ Router.get('/attachments', (req, res) => {
 });
 
 module.exports = Router;
+
+
+
+
+// (SELECT c.image FROM gun_attachments AS c WHERE c.id = (SELECT d.id FROM gun_attachments AS d WHERE d.type=a.type LIMIT 1) ORDER BY RAND() LIMIT 1) AS attachment_image

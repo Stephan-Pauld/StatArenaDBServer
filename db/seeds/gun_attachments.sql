@@ -1,14 +1,14 @@
 INSERT INTO gun_attachments (name, image, type, gun_id) 
 values 
-('Granulated Grip Tape', '../img/trainstation-weapon.jpeg', 'grip', 1),
-('Stippled Grip Tape', '../img/trainstation-weapon.jpeg', 'grip', 1),
-('FSS Raider Stock', '../img/trainstation-weapon.jpeg', 'grip', 1),
+('Granulated Grip Tape', '../img/trainstation-weapon.jpeg', 'Grip', 1),
+('Stippled Grip Tape', '../img/trainstation-weapon.jpeg', 'Grip', 1),
+('FSS Raider Stock', '../img/trainstation-weapon.jpeg', 'Grip', 1),
 ('Lightweight Supressor', '../img/trainstation-weapon.jpeg', 'Muzzle', 1),
 ('Monolotic Supressor', '../img/trainstation-weapon.jpeg', 'Muzzle', 1),
 ('Tactical Supressor', '../img/trainstation-weapon.jpeg', 'Muzzle', 1),
-('Forge Tac Stalker', '../img/trainstation-weapon.jpeg', 'grip', 1),
-('FTAC hunter', '../img/trainstation-weapon.jpeg', 'grip', 1),
-('FTAC', '../img/trainstation-weapon.jpeg', 'grip', 1),
+('Forge Tac Stalker', '../img/trainstation-weapon.jpeg', 'Stock', 1),
+('FTAC hunter', '../img/trainstation-weapon.jpeg', 'Stock', 1),
+('FTAC', '../img/trainstation-weapon.jpeg', 'Stock', 1),
 ('Operator Reflex Sight', '../img/trainstation-weapon.jpeg', 'Optic', 1),
 ('Aim-Op Reflex Sight', '../img/trainstation-weapon.jpeg', 'Optic', 1),
 ('Viper Reflex Sight', '../img/trainstation-weapon.jpeg', 'Optic', 1),
@@ -35,4 +35,4 @@ values
 ('Last Available Barrel', '../img/trainstation-weapon.jpeg', 'Barrel', 1),
 ('Fully Loaded', '../img/trainstation-weapon.jpeg', 'Barrel', 1),
 ('Focus', '../img/trainstation-weapon.jpeg', 'Barrel', 1),
-('Akimbo', '../img/trainstation-weapon.jpeg', 'Barrel', 1),
+('Akimbo', '../img/trainstation-weapon.jpeg', 'Barrel', 1);
