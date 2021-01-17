@@ -4,7 +4,7 @@ const sqlConnection = require('../lib/db.js');
 Router.use(express.json());
 
 Router.get('/dropzone', (req, res) => {
-    sqlConnection.query('SELECT * FROM dropzone ORDER BY RAND() LIMIT 1;', (error, results) => {
+    sqlConnection.query('SELECT * FROM drop_zones ORDER BY RAND() LIMIT 1;', (error, results) => {
     if (error) {
       return;
     }
@@ -14,7 +14,7 @@ Router.get('/dropzone', (req, res) => {
 });
 
 Router.get('/rules', (req, res) => {
-  sqlConnection.query('SELECT * FROM rules ORDER BY RAND() LIMIT 1;', (error, results) => {
+  sqlConnection.query('SELECT * FROM special_rules ORDER BY RAND() LIMIT 1;', (error, results) => {
     if (error) {
       return;
     }
@@ -24,7 +24,7 @@ Router.get('/rules', (req, res) => {
 });
 
 Router.get('/gun', (req, res) => {
-  sqlConnection.query('SELECT * FROM weapon ORDER BY RAND() LIMIT 1;', (error, results) => {
+  sqlConnection.query('SELECT * FROM guns ORDER BY RAND() LIMIT 1;', (error, results) => {
     if (error) {
       return;
     }
