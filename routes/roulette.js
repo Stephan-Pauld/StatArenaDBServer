@@ -24,11 +24,21 @@ Router.get('/rules', (req, res) => {
 });
 
 Router.get('/gun', (req, res) => {
-  sqlConnection.query('SELECT * FROM guns ORDER BY RAND() LIMIT 1;', (error, results) => {
+  sqlConnection.query('SELECT * FROM guns WHERE category in ("AR", "Sniper", "Light Machine Gun", "SMG") ORDER BY RAND() LIMIT 1;', (error, results) => {
     if (error) {
       return;
     }
     console.log("Server Weapon query: ", results);
+    res.send(results);
+  });
+});
+
+Router.get('/secondary', (req, res) => {
+  sqlConnection.query('SELECT * FROM guns WHERE category in ("Launchers", "Shotgun", "Melees", "Pistol") ORDER BY RAND() LIMIT 1;', (error, results) => {
+    if (error) {
+      return;
+    }
+    console.log("Server Weapon2 query: ", results);
     res.send(results);
   });
 });
