@@ -71,3 +71,5 @@ INSERT INTO guns (name, image, category) values ('PILA', '../img/trainstation-we
 INSERT INTO guns (name, image, category) values ('JOKR', '../img/trainstation-weapon.jpeg', 'Launchers');
 INSERT INTO guns (name, image, category) values ('Strela-P', '../img/trainstation-weapon.jpeg', 'Launchers');
 
+
+
