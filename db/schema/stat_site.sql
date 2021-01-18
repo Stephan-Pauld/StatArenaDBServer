@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS `user_achievements`;
 DROP TABLE IF EXISTS `user_tracked_stats`;
 DROP TABLE IF EXISTS `achievements`;
 DROP TABLE IF EXISTS `gun_attachments`;
+DROP TABLE IF EXISTS `tactical_lethal`;
 DROP TABLE IF EXISTS `drop_zones`;
 DROP TABLE IF EXISTS `special_rules`;
 
@@ -88,6 +89,22 @@ CREATE TABLE IF NOT EXISTS `gun_attachments` (
     REFERENCES `guns` (`id`)
     ON DELETE CASCADE);
 
+-- -----------------------------------------------------
+-- Table `gun_attachments`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tactical_lethal` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `gun_id` INT NOT NULL,
+  `type` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `image` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  INDEX `fk_tactical_lethal_1_idx` (`gun_id` ASC) VISIBLE,
+  CONSTRAINT `fk_tactical_lethal_1`
+    FOREIGN KEY (`gun_id`)
+    REFERENCES `guns` (`id`)
+    ON DELETE CASCADE);
 
 -- -----------------------------------------------------
 -- Table `special_rules`

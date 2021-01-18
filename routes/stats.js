@@ -78,11 +78,25 @@ function cache(key) {
 					console.log("Grabbing Cached for OverlayStats!!");
 
 					const allData = JSON.parse(data);
-					const gameModes = allData.lifetime.mode
-					console.log(allData);
-					console.log(Object.keys(allData));
+					// console.log(allData);
+					// console.log(Object.keys(allData));
 
-					// res.send(allData)
+					const statsObj = [{
+						level: allData.level,
+						prestige: allData.prestige,
+						totalXp: allData.totalXp,
+						weeklyData: allData.weekly,
+						gameModes: allData.lifetime.mode,
+						guns: allData.lifetime.itemData,
+					}]
+
+					const stats = [
+						{weeklyData: allData.weekly},
+						{gameModes: allData.lifetime.mode},
+						{guns: allData.lifetime.itemData},
+					]
+
+					res.send(stats)
 				} else {
 					next()
 				}
@@ -91,6 +105,28 @@ function cache(key) {
 	}
 }
 
+
+
+// NOTES FOR PATHS!!!
+// allData.weekly =  Weekly data (2 types of data mode [ 'br_all', 'br_brduos' ])
+
+// allData. ANY OF THE BELOW Shows imidiate data.. platform = battlenet , Level prestieges
+//    title',
+//   'platform',
+//   'username',
+//   'type',
+//   'level',
+//   'maxLevel',
+//   'levelXpRemainder',
+//   'levelXpGained',
+//   'prestige',
+//   'prestigeId',
+//   'maxPrestige',
+//   'totalXp',
+//   'paragonRank',
+//   'paragonId',
+//   's',
+//   'p',
 
 
 
