@@ -27,7 +27,7 @@ function cache(key) {
 				if (err) throw err;
 				if (data !== null) {
           console.log("Grabbing Cached AllData!!");
-          console.log('Data.weekly: ', data)
+          // console.log('Data.weekly: ', data)
 					res.send(JSON.parse(data))
 				} else {
 					next()
@@ -123,7 +123,6 @@ Router.get("/:username", cache('-data'), (req, res) => {
 			let data = await API.MWwz(USERNAME, PLATFORM);
 			console.log("Sending ALL Data!!!");
 			const { username } = req.params
-      // console.log(data.weekly);
 
       if (data.weekly.all.properties !== null) {
         const allData = [
@@ -147,9 +146,8 @@ Router.get("/:username", cache('-data'), (req, res) => {
           client.setex(`${username}`, 3600, newData)
           res.send(allData)
         };
-
-
-		} catch (error) {
+    } 
+    catch (error) {
 			console.log("Data Error");
 			console.log(error);
 		}
