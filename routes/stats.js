@@ -5,9 +5,9 @@ const { REDIS_PORT, EMAIL, PASSWORD, USERNAME, PLATFORM } = require("../consts")
 const API = require('call-of-duty-api')({ platform: "acti" });
 const cors = require('cors')
 const redis = require('redis');
-const port = process.env.PORT || 3030
+// const port = process.env.PORT || 3030
 const bodyParser = require('body-parser');
-const sqlConnection = require('../lib/db.js');
+// const sqlConnection = require('../lib/db.js');
 const client = redis.createClient(process.env.REDIS_URL);
 
 const app = express();
@@ -51,31 +51,32 @@ function cache(key) {
 				}
 			})
 		}
-	} else if (key === "-overlay") {
-		return function (req, res, next) {
+  } 
+  // else if (key === "-overlay") {
+	// 	return function (req, res, next) {
 
-			const { username } = req.params;
-			client.get(`${username}${key}`, (err, data) => {
-				if (err) throw err;
+	// 		const { username } = req.params;
+	// 		client.get(`${username}${key}`, (err, data) => {
+	// 			if (err) throw err;
 
-				if (data !== null) {
-					console.log("Grabbing Cached for OverlayStats!!");
+	// 			if (data !== null) {
+	// 				console.log("Grabbing Cached for OverlayStats!!");
 
-					const allData = JSON.parse(data);
+	// 				const allData = JSON.parse(data);
 
-					const stats = [
-						{ weeklyData: allData.weekly },
-						{ gameModes: allData.lifetime.mode },
-						{ guns: allData.lifetime.itemData },
-					]
+	// 				const stats = [
+	// 					{ weeklyData: allData.weekly },
+	// 					{ gameModes: allData.lifetime.mode },
+	// 					{ guns: allData.lifetime.itemData },
+	// 				]
 
-					res.send(stats)
-				} else {
-					next()
-				}
-			})
-		}
-	}
+	// 				res.send(stats)
+	// 			} else {
+	// 				next()
+	// 			}
+	// 		})
+	// 	}
+	// }
 }
 
 Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
