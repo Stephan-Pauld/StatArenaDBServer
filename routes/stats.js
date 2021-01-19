@@ -123,7 +123,7 @@ Router.get("/:username", cache('-data'), (req, res) => {
 			let data = await API.MWwz(USERNAME, PLATFORM);
 			console.log("Sending ALL Data!!!");
 			const { username } = req.params
-      console.log(data.weekly);
+      // console.log(data.weekly);
 
       if (data.weekly.all.properties !== null) {
         const allData = [
