@@ -117,7 +117,6 @@ Router.get("/:username", cache('-data'), (req, res) => {
 		} catch (Error) {
 			//Handle Exception
 			console.log("Login Error");
-
 			console.log("error");
 		}
 		try {
