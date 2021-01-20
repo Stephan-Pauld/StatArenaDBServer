@@ -10,11 +10,7 @@ const bodyParser = require('body-parser');
 // const sqlConnection = require('../lib/db.js');
 const client = redis.createClient(process.env.REDIS_URL);
 
-const app = express();
-app.use(bodyParser.json());
-app.use(express.static("public"));
-app.use(cors());
-app.use(express.json());
+
 
 function cache(key) {
 	console.log("Checking");
@@ -78,6 +74,14 @@ function cache(key) {
 	// 	}
 	// }
 }
+// console.log("hereeee");
+// Router.post("/:username", (req, res) => {
+//   console.log("hello");
+ 
+//   console.log(req.body);
+//   res.status(200).end()
+// })
+
 
 Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
 	async function getTrackedData() {
@@ -109,9 +113,27 @@ Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
 	}
 	getTrackedData()
 });
-
-Router.get("/:username", cache('-data'), (req, res) => {
+// SardarMamad#3717309
+// , cache('-data'):gamerTag&:platfrom
+// 
+Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
+  console.log(req.params);
+  let gamer;
+  let plat;
+  if (req.params.gamerTag && req.params.platform) {
+    console.log("hello, moooo");
+     gamer = req.params.gamerTag
+     plat = req.params.platform
+     console.log(plat);
+    
+  } else {
+    gamer = USERNAME
+    plat = PLATFORM
+    return;
+  }
+  
 	async function getGunData() {
+    console.log("here or not here");
 		try {
 			await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
 			console.log("Logging In");
@@ -119,9 +141,11 @@ Router.get("/:username", cache('-data'), (req, res) => {
 			//Handle Exception
 			console.log("Login Error");
 			console.log("error");
-		}
+    }
+    console.log(gamer);
 		try {
-			let data = await API.MWwz(USERNAME, PLATFORM);
+      console.log("indside", gamer);
+			let data = await API.MWwz(gamer, plat);
 			console.log("Sending ALL Data!!!");
 			const { username } = req.params
 
@@ -218,6 +242,8 @@ Router.get("/:username", cache('-data'), (req, res) => {
 // 	}
 // 	getAllOverlayData()
 // });
+
+
 
 
 
