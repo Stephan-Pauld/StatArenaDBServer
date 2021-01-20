@@ -121,6 +121,7 @@ Router.get("/:username", cache('-data'), (req, res) => {
 			console.log("error");
 		}
 		try {
+			console.log(USERNAME, PLATFORM);
 			let data = await API.MWwz(USERNAME, PLATFORM);
 			console.log("Sending ALL Data!!!");
 			const { username } = req.params
