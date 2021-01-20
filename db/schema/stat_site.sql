@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS `guns` CASCADE;
 
 DROP TABLE IF EXISTS `user_achievements`;
 DROP TABLE IF EXISTS `user_tracked_stats`;
+DROP TABLE IF EXISTS `user_overlay_data`;
 DROP TABLE IF EXISTS `achievements`;
 DROP TABLE IF EXISTS `gun_attachments`;
 DROP TABLE IF EXISTS `tactical_lethal`;
@@ -161,6 +162,23 @@ CREATE TABLE IF NOT EXISTS `user_tracked_stats` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_user_tracked_stats_1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_user_tracked_stats_1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`id`)
+    ON DELETE CASCADE);
+
+-- -----------------------------------------------------
+-- Table `user_overlay_data`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `user_overlay_data` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `size` VARCHAR(100) NOT NULL,
+  `user_id` INT NOT NULL,
+  `uniqueURLKey` VARCHAR(255) NOT NULL,
+  `stats` JSON NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  INDEX `fk_user_tracked_stats_1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_user_overlay_data_1`
     FOREIGN KEY (`user_id`)
     REFERENCES `users` (`id`)
     ON DELETE CASCADE);
