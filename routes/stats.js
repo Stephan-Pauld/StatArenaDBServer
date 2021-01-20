@@ -23,7 +23,6 @@ function cache(key) {
 				if (err) throw err;
 				if (data !== null) {
           console.log("Grabbing Cached AllData!!");
-          // console.log('Data.weekly: ', data)
 					res.send(JSON.parse(data))
 				} else {
 					next()
@@ -97,9 +96,8 @@ Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
 		try {
 			let data = await API.MWwz(USERNAME, PLATFORM);
 
-			console.log("Sending Tracked Data!!!");
 			const { username, gunName, category } = req.params
-			console.log(username, gunName, category);
+			console.log("Sending Tracked Data!!!", username, gunName, category);
 			const trackedStat = JSON.stringify(data.lifetime.itemData[category][gunName])
 			console.log(username, "is getting data for a tracked gun: ", gunName);
 
@@ -116,24 +114,24 @@ Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
 // SardarMamad#3717309
 // , cache('-data'):gamerTag&:platfrom
 // 
+
 Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
-  console.log(req.params);
-  let gamer;
-  let plat;
+  console.log('Server side: ', req.params);
+  let gamerTag;
+  let gamerPlatform;
+
   if (req.params.gamerTag && req.params.platform) {
-    console.log("hello, moooo");
-     gamer = req.params.gamerTag
-     plat = req.params.platform
-     console.log(plat);
+    console.log("Setting gamer info from params...");
+     gamerTag = req.params.gamerTag
+     gamerPlatform = req.params.platform
+     console.log(gamerPlatform);
     
   } else {
-    gamer = USERNAME
-    plat = PLATFORM
-    return;
-  }
-  
+    console.log("Setting gamer info from ENVIRONMENT...");
+    gamerTag = USERNAME;
+    gamerPlatform = PLATFORM;
+  }  
 	async function getGunData() {
-    console.log("here or not here");
 		try {
 			await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
 			console.log("Logging In");
@@ -142,12 +140,10 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
 			console.log("Login Error");
 			console.log("error");
     }
-    console.log(gamer);
 		try {
-      console.log("indside", gamer);
-			let data = await API.MWwz(gamer, plat);
+			let data = await API.MWwz(gamerTag, gamerPlatform);
 			console.log("Sending ALL Data!!!");
-			const { username } = req.params
+			// const { username } = req.params
 
       if (data.weekly.all.properties !== null) {
         const allData = [
@@ -157,7 +153,7 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
           { lifetimeData: data.lifetime.all.properties }
         ];  
           const newData = JSON.stringify(allData)
-          client.setex(`${username}`, 3600, newData)
+          client.setex(`${gamerTag}`, 3600, newData)
           res.send(allData)
         }
       else {
@@ -168,7 +164,7 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
           { lifetimeData: data.lifetime.all.properties }
         ];
           const newData = JSON.stringify(allData)
-          client.setex(`${username}`, 3600, newData)
+          client.setex(`${gamerTag}`, 3600, newData)
           res.send(allData)
         };
     } 
@@ -247,5 +243,5 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
 
 
 
-module.exports = Router
+module.exports = Router;
 
