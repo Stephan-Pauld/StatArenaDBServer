@@ -16,13 +16,13 @@ function cache(key) {
 	console.log("Checking");
 	if (key === "-data") {
 		return function (req, res, next) {
-			const { username } = req.params;
 
-			client.get(`${username}`, (err, data) => {
+			const gamerTag = req.params.gamerTag
+			client.get(`${gamerTag}`, (err, data) => {
 
 				if (err) throw err;
 				if (data !== null) {
-          console.log("Grabbing Cached AllData!!");
+          console.log("Grabbing Cached AllData!! for", gamerTag);
 					res.send(JSON.parse(data))
 				} else {
 					next()
