@@ -23,6 +23,7 @@ function cache(key) {
 				if (err) throw err;
 				if (data !== null) {
 					console.log("Grabbing Cached AllData!! for", gamerTag);
+					// console.log(JSON.parse(data));
 					res.send(JSON.parse(data))
 				} else {
 					next()
@@ -150,7 +151,8 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
 					{ weeklyData: data.weekly },
 					{ gameModes: data.lifetime.mode },
 					{ guns: data.lifetime.itemData },
-					{ lifetimeData: data.lifetime.all.properties }
+					{ lifetimeData: data.lifetime.all.properties },
+					{	allstats: data}
 				];
 				const newData = JSON.stringify(allData)
 				client.setex(`${gamerTag}`, 3600, newData)
@@ -161,7 +163,8 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
 					{ weeklyData: null },
 					{ gameModes: data.lifetime.mode },
 					{ guns: data.lifetime.itemData },
-					{ lifetimeData: data.lifetime.all.properties }
+					{ lifetimeData: data.lifetime.all.properties },
+					{	allstats: data}
 				];
 				const newData = JSON.stringify(allData)
 				client.setex(`${gamerTag}`, 3600, newData)
