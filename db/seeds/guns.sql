@@ -1,75 +1,62 @@
-INSERT INTO guns (name, image, category) values ('MP5', '../img/trainstation-weapon.jpeg', 'SMG');
-INSERT INTO guns (name, image, category) values ('MP7', '../img/trainstation-weapon.jpeg', 'SMG');
-INSERT INTO guns (name, image, category) values ('AUG', '../img/trainstation-weapon.jpeg', 'SMG');
-INSERT INTO guns (name, image, category) values ('Mac-10', '../img/trainstation-weapon.jpeg', 'SMG');
-INSERT INTO guns (name, image, category) values ('P90', '../img/trainstation-weapon.jpeg', 'SMG');
-INSERT INTO guns (name, image, category) values ('PP19 Bizon', '../img/trainstation-weapon.jpeg', 'SMG');
-INSERT INTO guns (name, image, category) values ('Uzi', '../img/trainstation-weapon.jpeg', 'SMG');
-INSERT INTO guns (name, image, category) values ('Striker 45', '../img/trainstation-weapon.jpeg', 'SMG');
-INSERT INTO guns (name, image, category) values ('Fennec', '../img/trainstation-weapon.jpeg', 'SMG');
-INSERT INTO guns (name, image, category) values ('ISO SMG', '../img/trainstation-weapon.jpeg', 'SMG');
-
-
-INSERT INTO guns (name, image, category) values ('AK47', '../img/trainstation-weapon.jpeg', 'AR');
-INSERT INTO guns (name, image, category) values ('M13', '../img/trainstation-weapon.jpeg', 'AR');
-INSERT INTO guns (name, image, category) values ('FR 5.56', '../img/trainstation-weapon.jpeg', 'AR');
-INSERT INTO guns (name, image, category) values ('FN SCAR 17', '../img/trainstation-weapon.jpeg', 'AR');
-INSERT INTO guns (name, image, category) values ('FAL', '../img/trainstation-weapon.jpeg', 'AR');
-INSERT INTO guns (name, image, category) values ('RAM-7', '../img/trainstation-weapon.jpeg', 'AR');
-INSERT INTO guns (name, image, category) values ('CR-56 AMAX', '../img/trainstation-weapon.jpeg', 'AR');
-INSERT INTO guns (name, image, category) values ('Killo141', '../img/trainstation-weapon.jpeg', 'AR');
-INSERT INTO guns (name, image, category) values ('Oden', '../img/trainstation-weapon.jpeg', 'AR');
-INSERT INTO guns (name, image, category) values ('AS VAL', '../img/trainstation-weapon.jpeg', 'AR');
-
-
-INSERT INTO guns (name, image, category) values ('Rytec AMR (Barret)', '../img/trainstation-weapon.jpeg', 'Sniper');
-INSERT INTO guns (name, image, category) values ('AX-50', '../img/trainstation-weapon.jpeg', 'Sniper');
-INSERT INTO guns (name, image, category) values ('Draganov', '../img/trainstation-weapon.jpeg', 'Sniper');
-INSERT INTO guns (name, image, category) values ('HDR', '../img/trainstation-weapon.jpeg', 'Sniper');
-INSERT INTO guns (name, image, category) values ('EBR-14', '../img/trainstation-weapon.jpeg', 'Sniper');
-INSERT INTO guns (name, image, category) values ('KAR98K', '../img/trainstation-weapon.jpeg', 'Sniper');
-INSERT INTO guns (name, image, category) values ('MK2 Carbine', '../img/trainstation-weapon.jpeg', 'Sniper');
-INSERT INTO guns (name, image, category) values ('Crossbow', '../img/trainstation-weapon.jpeg', 'Sniper');
-INSERT INTO guns (name, image, category) values ('SKS', '../img/trainstation-weapon.jpeg', 'Sniper');
-INSERT INTO guns (name, image, category) values ('SP-R 208', '../img/trainstation-weapon.jpeg', 'Sniper');
-
-
-INSERT INTO guns (name, image, category) values ('X16', '../img/trainstation-weapon.jpeg', 'Pistol');
-INSERT INTO guns (name, image, category) values ('1911', '../img/trainstation-weapon.jpeg', 'Pistol');
-INSERT INTO guns (name, image, category) values ('.357', '../img/trainstation-weapon.jpeg', 'Pistol');
-INSERT INTO guns (name, image, category) values ('.50 GS', '../img/trainstation-weapon.jpeg', 'Pistol');
-INSERT INTO guns (name, image, category) values ('M19', '../img/trainstation-weapon.jpeg', 'Pistol');
-INSERT INTO guns (name, image, category) values ('Renetti', '../img/trainstation-weapon.jpeg', 'Pistol');
-
-
-INSERT INTO guns (name, image, category) values ('Butterfly Knife', '../img/trainstation-weapon.jpeg', 'Melees');
-INSERT INTO guns (name, image, category) values ('Try Fist', '../img/trainstation-weapon.jpeg', 'Melees');
-INSERT INTO guns (name, image, category) values ('knife', '../img/trainstation-weapon.jpeg', 'Melees');
-INSERT INTO guns (name, image, category) values ('Axe', '../img/trainstation-weapon.jpeg', 'Melees');
-INSERT INTO guns (name, image, category) values ('Riot Shield', '../img/trainstation-weapon.jpeg', 'Melees');
-
-
-
-INSERT INTO guns (name, image, category) values ('Model 680', '../img/trainstation-weapon..jpeg', 'Shotgun');
-INSERT INTO guns (name, image, category) values ('R9-0 Shotgun', '../img/trainstation-weapon..jpeg', 'Shotgun');
-INSERT INTO guns (name, image, category) values ('725', '../img/trainstation-weapon..jpeg', 'Shotgun');
-INSERT INTO guns (name, image, category) values ('Origin 12 Shotgun', '../img/trainstation-weapon..jpeg', 'Shotgun');
-INSERT INTO guns (name, image, category) values ('VLK Rouge', '../img/trainstation-weapon..jpeg', 'Shotgun');
-INSERT INTO guns (name, image, category) values ('JAK-12', '../img/trainstation-weapon..jpeg', 'Shotgun');
-
-
-INSERT INTO guns (name, image, category) values ('M91', '../img/trainstation-weapon.jpeg', 'Light Machine Gun');
-INSERT INTO guns (name, image, category) values ('PKM', '../img/trainstation-weapon.jpeg', 'Light Machine Gun');
-INSERT INTO guns (name, image, category) values ('MG34', '../img/trainstation-weapon.jpeg', 'Light Machine Gun');
-INSERT INTO guns (name, image, category) values ('SA87', '../img/trainstation-weapon.jpeg', 'Light Machine Gun');
-INSERT INTO guns (name, image, category) values ('MK9 Bruen', '../img/trainstation-weapon.jpeg', 'Light Machine Gun');
-INSERT INTO guns (name, image, category) values ('FiNN', '../img/trainstation-weapon.jpeg', 'Light Machine Gun');
-INSERT INTO guns (name, image, category) values ('holger-26', '../img/trainstation-weapon.jpeg', 'Light Machine Gun');
-
-INSERT INTO guns (name, image, category) values ('RPG-7', '../img/trainstation-weapon.jpeg', 'Launchers');
-INSERT INTO guns (name, image, category) values ('PILA', '../img/trainstation-weapon.jpeg', 'Launchers');
-INSERT INTO guns (name, image, category) values ('JOKR', '../img/trainstation-weapon.jpeg', 'Launchers');
-INSERT INTO guns (name, image, category) values ('Strela-P', '../img/trainstation-weapon.jpeg', 'Launchers');
+INSERT INTO guns (name, category) VALUES
+('MP5', 'SMG'),
+('MP7', 'SMG'),
+('AUG', 'SMG'),
+('Mac-10', 'SMG'),
+('P90', 'SMG'),
+('PP19 Bizon', 'SMG'),
+('Uzi', 'SMG'),
+('Striker 45', 'SMG'),
+('Fennec', 'SMG'),
+('ISO SMG', 'SMG'),
+('AK47', 'AR'),
+('M13', 'AR'),
+('FR 5.56', 'AR'),
+('FN SCAR 17', 'AR'),
+('FAL', 'AR'),
+('RAM-7', 'AR'),
+('CR-56 AMAX', 'AR'),
+('Killo141', 'AR'),
+('Oden', 'AR'),
+('AS VAL', 'AR'),
+('Rytec AMR (Barret)', 'Sniper'),
+('AX-50', 'Sniper'),
+('Draganov', 'Sniper'),
+('HDR', 'Sniper'),
+('EBR-14', 'Sniper'),
+('KAR98K', 'Sniper'),
+('MK2 Carbine', 'Sniper'),
+('Crossbow', 'Sniper'),
+('SKS', 'Sniper'),
+('SP-R 208', 'Sniper'),
+('X16', 'Pistol'),
+('1911', 'Pistol'),
+('.357', 'Pistol'),
+('.50 GS', 'Pistol'),
+('M19', 'Pistol'),
+('Renetti', 'Pistol'),
+('Butterfly Knife', 'Melees'),
+('Try Fist', 'Melees'),
+('knife', 'Melees'),
+('Axe', 'Melees'),
+('Riot Shield', 'Melees'),
+('Model 680', 'Shotgun'),
+('R9-0 Shotgun', 'Shotgun'),
+('725', 'Shotgun'),
+('Origin 12 Shotgun', 'Shotgun'),
+('VLK Rouge', 'Shotgun'),
+('JAK-12', 'Shotgun'),
+('M91', 'Light Machine Gun'),
+('PKM', 'Light Machine Gun'),
+('MG34', 'Light Machine Gun'),
+('SA87', 'Light Machine Gun'),
+('MK9 Bruen', 'Light Machine Gun'),
+('FiNN', 'Light Machine Gun'),
+('holger-26', 'Light Machine Gun'),
+('RPG-7', 'Launchers'),
+('PILA', 'Launchers'),
+('JOKR', 'Launchers'),
+('Strela-P', 'Launchers');
 
 
 

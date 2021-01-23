@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `achievements` (
 CREATE TABLE IF NOT EXISTS `drop_zones` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `image` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
 
@@ -68,7 +67,6 @@ CREATE TABLE IF NOT EXISTS `guns` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `category` VARCHAR(255) NOT NULL,
-  `image` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
 
@@ -81,7 +79,6 @@ CREATE TABLE IF NOT EXISTS `gun_attachments` (
   `gun_id` INT NOT NULL,
   `type` VARCHAR(255) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
-  `image` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_gun_attachments_1_idx` (`gun_id` ASC) VISIBLE,
@@ -91,21 +88,14 @@ CREATE TABLE IF NOT EXISTS `gun_attachments` (
     ON DELETE CASCADE);
 
 -- -----------------------------------------------------
--- Table `gun_attachments`
+-- Table `tactical_lethal`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tactical_lethal` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `gun_id` INT NOT NULL,
   `type` VARCHAR(255) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
-  `image` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_tactical_lethal_1_idx` (`gun_id` ASC) VISIBLE,
-  CONSTRAINT `fk_tactical_lethal_1`
-    FOREIGN KEY (`gun_id`)
-    REFERENCES `guns` (`id`)
-    ON DELETE CASCADE);
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
 
 -- -----------------------------------------------------
 -- Table `special_rules`

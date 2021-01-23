@@ -48,10 +48,12 @@ Router.get('/attachments', (req, res) => {
 
   const queryString = `
   SELECT a.type,
-  (SELECT b.name FROM gun_attachments AS b WHERE a.type = b.type ORDER BY RAND() LIMIT 1) AS attachment_name,
-  (SELECT c.image FROM gun_attachments AS c WHERE c.id = (SELECT d.id FROM gun_attachments AS d WHERE d.type=a.type LIMIT 1) ORDER BY RAND() LIMIT 1) AS attachment_image 
+  (SELECT b.name FROM gun_attachments AS b WHERE a.type = b.type ORDER BY RAND() LIMIT 1) AS attachment_name 
   FROM gun_attachments AS a GROUP BY a.type ORDER BY RAND() LIMIT 5;`;
-
+  // SELECT a.type,
+  // (SELECT b.name FROM gun_attachments AS b WHERE a.type = b.type ORDER BY RAND() LIMIT 1) AS attachment_name,
+  // (SELECT c.image FROM gun_attachments AS c WHERE c.id = (SELECT d.id FROM gun_attachments AS d WHERE d.type=a.type LIMIT 1) ORDER BY RAND() LIMIT 1) AS attachment_image 
+  // FROM gun_attachments AS a GROUP BY a.type ORDER BY RAND() LIMIT 5;`;
   sqlConnection.query(queryString, (error, results) => {
     if (error) {
       return;
@@ -65,10 +67,12 @@ Router.get('/tactical', (req, res) => {
 
   const queryString = `
   SELECT a.type,
-  (SELECT b.name FROM tactical_lethal AS b WHERE a.type = b.type ORDER BY RAND() LIMIT 1) AS attachment_name,
-  (SELECT c.image FROM tactical_lethal AS c WHERE c.id = (SELECT d.id FROM tactical_lethal AS d WHERE d.type=a.type LIMIT 1) ORDER BY RAND() LIMIT 1) AS attachment_image 
+  (SELECT b.name FROM tactical_lethal AS b WHERE a.type = b.type ORDER BY RAND() LIMIT 1) AS attachment_name
   FROM tactical_lethal AS a GROUP BY a.type ORDER BY RAND() LIMIT 2;`;
-
+  // SELECT a.type,
+  // (SELECT b.name FROM tactical_lethal AS b WHERE a.type = b.type ORDER BY RAND() LIMIT 1) AS attachment_name,
+  // (SELECT c.image FROM tactical_lethal AS c WHERE c.id = (SELECT d.id FROM tactical_lethal AS d WHERE d.type=a.type LIMIT 1) ORDER BY RAND() LIMIT 1) AS attachment_image 
+  // FROM tactical_lethal AS a GROUP BY a.type ORDER BY RAND() LIMIT 2;`;
   sqlConnection.query(queryString, (error, results) => {
     if (error) {
       return;
