@@ -8,7 +8,7 @@ Router.get('/dropzone', (req, res) => {
     if (error) {
       return;
     }
-    console.log("Server Dropzone query: ", results);
+    // console.log("Server Dropzone query: ", results);
     res.send(results);
   });
 });
@@ -18,7 +18,7 @@ Router.get('/rules', (req, res) => {
     if (error) {
       return;
     }
-    console.log("Server Rules query: ", results);
+    // console.log("Server Rules query: ", results);
     res.send(results);
   });
 });
@@ -28,7 +28,7 @@ Router.get('/primary', (req, res) => {
     if (error) {
       return;
     }
-    console.log("Server Secondary query: ", results);
+    // console.log("Server Secondary query: ", results);
     res.send(results);
   });
 });
@@ -39,7 +39,7 @@ Router.get('/secondary', (req, res) => {
     if (error) {
       return;
     }
-    console.log("Server Secondary query: ", results);
+    // console.log("Server Secondary query: ", results);
     res.send(results);
   });
 });
@@ -58,7 +58,7 @@ Router.get('/attachments', (req, res) => {
     if (error) {
       return;
     }
-    console.log("Server attachment query: ", results);
+    // console.log("Server attachment query: ", results);
     res.send(results);
   });
 });
@@ -77,7 +77,7 @@ Router.get('/tactical', (req, res) => {
     if (error) {
       return;
     }
-    console.log("Server tactical/lethal query: ", results);
+    // console.log("Server tactical/lethal query: ", results);
     res.send(results);
   });
 });
