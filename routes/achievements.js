@@ -12,7 +12,6 @@ Router.get("/", (req, res) => {
   FROM achievements a, achievement_badges b
   WHERE a.badge_id = b.id;`
   console.log(queryString);
-  // sqlConnection.query("SELECT * FROM achievements", (err, row, fields) => {
   sqlConnection.query(queryString, (err, row, fields) => {
       if (!err) {
         // console.log(row);

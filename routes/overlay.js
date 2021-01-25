@@ -8,11 +8,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 Router.put("/create", (req, res) => {
-
   const overlayStats = JSON.stringify(req.body.stats)
-
   const queryString = `
-INSERT INTO user_overlay_data (size, user_id, uniqueURLKey, stats) VALUES ('${req.body.size}', 1, '${req.body.urlKey}', '${overlayStats}');`;
+  INSERT INTO user_overlay_data (size, user_id, uniqueURLKey, stats) 
+  VALUES ('${req.body.size}', 1, '${req.body.urlKey}', '${overlayStats}');`;
   sqlConnection.query(queryString, (err, row, fields) => {
     if (!err) {
       res.send(req.body.urlKey);
@@ -20,12 +19,13 @@ INSERT INTO user_overlay_data (size, user_id, uniqueURLKey, stats) VALUES ('${re
       console.log("Query Error", err);
     };
   });
-
-})
+});
 
 Router.get("/show/:urlKey", (req, res) => {
-
-  const queryString = `SELECT a.gamer_tag, a.gamer_platform, b.* FROM users AS a, user_overlay_data AS b WHERE a.id=b.user_id AND b.uniqueURLKey = '${req.params.urlKey}';`;
+  const queryString = `
+  SELECT a.gamer_tag, a.gamer_platform, b.* 
+  FROM users AS a, user_overlay_data AS b 
+  WHERE a.id=b.user_id AND b.uniqueURLKey = '${req.params.urlKey}';`;
   sqlConnection.query(queryString, (err, row, fields) => {
     if (!err) {
       res.send(row);
@@ -33,10 +33,9 @@ Router.get("/show/:urlKey", (req, res) => {
       console.log("Query Error", err);
     };
   });
+});
 
-})
-
-module.exports = Router
+module.exports = Router;
 
 
 
