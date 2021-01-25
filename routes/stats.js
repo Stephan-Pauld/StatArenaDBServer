@@ -83,35 +83,35 @@ function cache(key) {
 // })
 
 
-Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
-	async function getTrackedData() {
-		try {
-			await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
-			console.log("Logging In");
-		} catch (Error) {
-			//Handle Exception
-			console.log("Login Error");
+// Router.get("/:username/:gunName/:category", cache('-tracked'), (req, res) => {
+// 	async function getTrackedData() {
+// 		try {
+// 			await API.login(EMAIL, PASSWORD); // need usersname and pass from https://www.callofduty.com/
+// 			console.log("Logging In");
+// 		} catch (Error) {
+// 			//Handle Exception
+// 			console.log("Login Error");
 
-			console.log("error");
-		}
-		try {
-			let data = await API.MWwz(USERNAME, PLATFORM);
+// 			console.log("error");
+// 		}
+// 		try {
+// 			let data = await API.MWwz(USERNAME, PLATFORM);
 
-			const { username, gunName, category } = req.params
-			console.log("Sending Tracked Data!!!", username, gunName, category);
-			const trackedStat = JSON.stringify(data.lifetime.itemData[category][gunName])
-			console.log(username, "is getting data for a tracked gun: ", gunName);
+// 			const { username, gunName, category } = req.params
+// 			console.log("Sending Tracked Data!!!", username, gunName, category);
+// 			const trackedStat = JSON.stringify(data.lifetime.itemData[category][gunName])
+// 			console.log(username, "is getting data for a tracked gun: ", gunName);
 
-			client.setex(`${username}-${gunName}-tracked`, 3600, trackedStat)
+// 			client.setex(`${username}-${gunName}-tracked`, 3600, trackedStat)
 
-			res.send(trackedStat)
-		} catch (error) {
-			console.log("Data Error");
-			console.log(error);
-		}
-	}
-	getTrackedData()
-});
+// 			res.send(trackedStat)
+// 		} catch (error) {
+// 			console.log("Data Error");
+// 			console.log(error);
+// 		}
+// 	}
+// 	getTrackedData()
+// });
 // SardarMamad#3717309
 // , cache('-data'):gamerTag&:platfrom
 // 
