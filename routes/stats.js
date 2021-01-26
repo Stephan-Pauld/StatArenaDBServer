@@ -90,8 +90,7 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
 		}
 		catch (error) {
 			console.log("Data Error");
-      console.log(error);
-      res.json({error:"cats"})
+      res.json({error:"Error"})
 		};
 	};
 	getGunData();

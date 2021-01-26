@@ -11,10 +11,8 @@ Router.get("/", (req, res) => {
   SELECT a.badge_id, a.frequency, a.starts_on, a.ends_on, a.category, a.category_ratio, b.name, b.image
   FROM achievements a, achievement_badges b
   WHERE a.badge_id = b.id;`
-  console.log(queryString);
   sqlConnection.query(queryString, (err, row, fields) => {
       if (!err) {
-        // console.log(row);
       res.send(row)
     } else {
       console.log("Query Error");

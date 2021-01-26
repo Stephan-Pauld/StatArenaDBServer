@@ -43,7 +43,6 @@ Router.get("/", (req, res) => {
 });
 
 Router.post("/addnew", (req, res) => {
-  console.log(req.body);
   const trackedStat = JSON.stringify(req.body);
   const gun = req.body.gun;
   const queryString = `SELECT stat_name FROM user_tracked_stats WHERE stat_name = '${gun}';`;
