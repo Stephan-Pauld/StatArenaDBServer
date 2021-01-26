@@ -69,7 +69,8 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
 					{ gameModes: data.lifetime.mode },
 					{ guns: data.lifetime.itemData },
 					{ lifetimeData: data.lifetime.all.properties },
-					{	allstats: data}
+          {	allstats: data},
+          {error: null}
 				];
 				const newData = JSON.stringify(allData);
 				client.setex(`${gamerTag}`, 3600, newData);
@@ -81,7 +82,8 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
 					{ gameModes: data.lifetime.mode },
 					{ guns: data.lifetime.itemData },
 					{ lifetimeData: data.lifetime.all.properties },
-					{	allstats: data}
+          {	allstats: data},
+          {error: null}
 				];
 				const newData = JSON.stringify(allData);
 				client.setex(`${gamerTag}`, 3600, newData);
@@ -89,8 +91,16 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
 			};
 		}
 		catch (error) {
-			console.log("Data Error");
-      res.json({error:"Error"})
+      console.log("Data Error");
+      const allData = [
+        { weeklyData: null },
+        { gameModes: null },
+        { guns: null },
+        { lifetimeData: null },
+        {	allstats: null},
+        {error: "error"}
+      ];
+      res.json(allData)
 		};
 	};
 	getGunData();
