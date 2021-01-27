@@ -12,7 +12,7 @@ const addNewGun = (trackedStat, gun) => {
 
   sqlConnection.query(queryString, (err, row, fields) => {
     if (!err) {
-      res.send(row)
+      // res.send(row)
     } else {
       console.log("Query Error", err);
     };
