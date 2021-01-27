@@ -73,7 +73,7 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
           {error: null}
 				];
 				const newData = JSON.stringify(allData);
-				client.setex(`${gamerTag}`, 3600, newData);
+				client.setex(`${gamerTag}`, 86400 , newData);
 				res.send(allData);
 			}
 			else {
@@ -86,7 +86,7 @@ Router.get("/:gamerTag&:platform", cache('-data'), (req, res) => {
           {error: null}
 				];
 				const newData = JSON.stringify(allData);
-				client.setex(`${gamerTag}`, 3600, newData);
+				client.setex(`${gamerTag}`, 86400 , newData);
 				res.send(allData);
 			};
 		}
