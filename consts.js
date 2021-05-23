@@ -1,5 +1,5 @@
 // const EMAIL = 'stephanpauld@gmail.com'
-// const PASSWORD = 'Project112'
+// const PASSWORD = 
 // const USERNAME = "stefler#1173"
 // const PLATFORM = "battle"
 // const PORT = 8080;
